@@ -11,6 +11,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Map;
+import java.util.concurrent.Callable;
 
 @Command(
         mixinStandardHelpOptions = true,
@@ -18,7 +19,7 @@ import java.util.Map;
         description = "Compares two configuration files and shows a difference."
 )
 
-public class App implements Runnable {
+public class App implements Callable<String> {
 
     @Option(names = { "-V", "--version" }, versionHelp = true, description = "Print version information and exit.")
     boolean versionInfoRequested;
@@ -36,16 +37,10 @@ public class App implements Runnable {
     static String filepath2;
 
     @Override
-    public void run() {
-        Map<String, Object> result;
-        try {
-            result = readAndParse();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+    public String call() throws Exception {
+        String result = Differ.generate(readAndParse(filepath1), readAndParse(filepath2));
         System.out.println(result);
-        System.out.println(result.get("host"));
-        System.out.println(result.get("timeout"));
+        return result;
     }
 
     public static void main(String[] args) {
@@ -61,12 +56,10 @@ public class App implements Runnable {
         commandLine.execute(args);
     }
 
-    public static Map<String, Object> readAndParse() throws Exception {
-        String fileText1 = Files.readString(getPath(filepath1));
-        String fileText2 = Files.readString(getPath(filepath2));
+    public static Map<String, Object> readAndParse(String path) throws Exception {
+        String fileText = Files.readString(getPath(path));
         ObjectMapper mapper = new ObjectMapper();
-        Map<String, Object> data1 = mapper.readValue(fileText1, new TypeReference<>(){});
-        return data1;
+        return mapper.readValue(fileText, new TypeReference<>(){});
     }
 
     public static Path getPath(String path) throws Exception {

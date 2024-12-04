@@ -43,3 +43,6 @@ bin/
 /.idea/.gitignore
 /.idea/gradle.xml
 /.idea/
+/diffJSON
+/file1.json
+/file2.json
