@@ -27,7 +27,8 @@ public class App implements Callable<String> {
     @Option(names = { "-h", "--help" }, usageHelp = true, description = "Show this help message and exit.")
     boolean helpRequested = false;
 
-    @Option(names = {"-f", "--format"}, paramLabel = "format", defaultValue = "stylish", description = "output format [default: ${DEFAULT-VALUE}]")
+    @Option(names = {"-f", "--format"}, paramLabel = "format",
+            defaultValue = "stylish", description = "output format [default: ${DEFAULT-VALUE}]")
     private String format;
 
     @Parameters(paramLabel = "filepath1", description = "path to first file")
@@ -59,7 +60,7 @@ public class App implements Callable<String> {
     public static Map<String, Object> readAndParse(String path) throws Exception {
         String fileText = Files.readString(getPath(path));
         ObjectMapper mapper = new ObjectMapper();
-        return mapper.readValue(fileText, new TypeReference<>(){});
+        return mapper.readValue(fileText, new TypeReference<>() { });
     }
 
     public static Path getPath(String path) throws Exception {
