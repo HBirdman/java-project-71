@@ -16,9 +16,7 @@ application {
     mainClass = "hexlet.code.App"
 }
 
-repositories {
-    mavenCentral()
-}
+repositories { mavenCentral() }
 
 dependencies {
     implementation("com.fasterxml.jackson.core:jackson-databind:2.18.1")
