@@ -1,5 +1,3 @@
-DEFAULT_GOAL := build-run
-
 install:
     make -C app install
 
@@ -20,7 +18,5 @@ report:
 
 lint:
     make -C app lint
-
-build-run: build run
 
 .PHONY: build
