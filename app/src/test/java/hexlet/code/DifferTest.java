@@ -6,25 +6,30 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DifferTest {
-    private Map<String, Object> file1;
-    private Map<String, Object> file2;
-    //private Map<String, Object> file3;
+    private Map<String, Object> json1;
+    private Map<String, Object> json2;
+    private Map<String, Object> yaml1;
+    private Map<String, Object> yaml2;
+
 
     @BeforeEach
     public void beforeEach() throws Exception {
-        this.file1 = App.readAndParse(
-                String.valueOf(App.getPath("src/test/resources/fixtures/file1.json"))
+        this.json1 = Parser.parseJson(
+                String.valueOf(Parser.getPath("src/test/resources/fixtures/file1.json"))
         );
-        this.file2 = App.readAndParse(
-                String.valueOf(App.getPath("src/test/resources/fixtures/file2.json"))
+        this.json2 = Parser.parseJson(
+                String.valueOf(Parser.getPath("src/test/resources/fixtures/file2.json"))
         );
-        //this.file3 = App.readAndParse(
-        //        String.valueOf(App.getPath("src/test/resources/fixtures/file3.json"))
-        //);
+        this.yaml1 = Parser.parseYaml(
+                String.valueOf(Parser.getPath("src/test/resources/fixtures/file1.yml"))
+        );
+        this.yaml2 = Parser.parseYaml(
+                String.valueOf(Parser.getPath("src/test/resources/fixtures/file2.yml"))
+        );
     }
 
     @Test
-    public void testGenerate() {
+    public void testGenerateJson() {
         String result = """
                 {
                   - follow: false
@@ -34,20 +39,20 @@ public class DifferTest {
                   + timeout: 20
                   + verbose: true
                 }""";
-        assertEquals(result, Differ.generate(file1, file2));
+        assertEquals(result, Differ.generate(json1, json2));
     }
 
     @Test
-    public void testGenerate2() {
+    public void testGenerateYaml() {
         String result = """
                 {
-                  + follow: false
+                  - follow: false
                     host: hexlet.io
-                  + proxy: 123.234.53.22
-                  - timeout: 20
-                  + timeout: 50
-                  - verbose: true
+                  - proxy: 123.234.53.22
+                  - timeout: 50
+                  + timeout: 20
+                  + verbose: true
                 }""";
-        assertEquals(result, Differ.generate(file2, file1));
+        assertEquals(result, Differ.generate(json1, json2));
     }
 }

@@ -1,16 +1,10 @@
 package hexlet.code;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Map;
 import java.util.concurrent.Callable;
 
 @Command(
@@ -39,8 +33,16 @@ public class App implements Callable<String> {
 
     @Override
     public String call() throws Exception {
-        String result = Differ.generate(readAndParse(filepath1), readAndParse(filepath2));
-        System.out.println(result);
+        String result = "";
+        if (filepath1.endsWith("json")) {
+            result = Differ.generate(Parser.parseJson(filepath1), Parser.parseJson(filepath2));
+            System.out.println(result);
+            return result;
+        } else if (filepath1.endsWith("yml")) {
+            result = Differ.generate(Parser.parseYaml(filepath1), Parser.parseYaml(filepath2));
+            System.out.println(result);
+            return result;
+        }
         return result;
     }
 
@@ -55,19 +57,5 @@ public class App implements Callable<String> {
             return;
         }
         commandLine.execute(args);
-    }
-
-    public static Map<String, Object> readAndParse(String path) throws Exception {
-        String fileText = Files.readString(getPath(path));
-        ObjectMapper mapper = new ObjectMapper();
-        return mapper.readValue(fileText, new TypeReference<>() { });
-    }
-
-    public static Path getPath(String path) throws Exception {
-        Path filePath = Paths.get(path).toAbsolutePath().normalize();
-        if (!Files.exists(filePath)) {
-            throw new Exception("File '" + filePath + "' does not exist");
-        }
-        return filePath;
     }
 }
