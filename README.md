@@ -11,6 +11,9 @@ https://asciinema.org/a/Z9K3irtOKH4xsV7CTLg9T72so
 # asciinema link for YAML comparing:
 https://asciinema.org/a/SA5gLrYC5nutrEuqif9gbhIms
 
+# asciinema link for nested structures:
+https://asciinema.org/a/NRMXboB1l8ESsxdph5atqDhPu
+
 ## Start
 
 ```bash

@@ -4,10 +4,10 @@ import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
-
 import java.util.concurrent.Callable;
 
 @Command(
+        version = "1.0.0",
         mixinStandardHelpOptions = true,
         name = "gendiff",
         description = "Compares two configuration files and shows a difference."
