@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Objects;
 
 
-public class stylish {
+public class Stylish {
     public static String format(List<Differ> differs) {
         StringBuilder result = new StringBuilder("{\n");
         for (var differ : differs) {

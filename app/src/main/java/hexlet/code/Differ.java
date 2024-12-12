@@ -1,8 +1,17 @@
 package hexlet.code;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -10,10 +19,10 @@ import java.util.*;
 @AllArgsConstructor
 @ToString
 public class Differ {
-    private String Key;
-    private Character Status;
-    private Object ValueBefore;
-    private Object ValueAfter;
+    private String key;
+    private Character status;
+    private Object valueBefore;
+    private Object valueAfter;
 
     public static String generate(Map<String, Object> map1, Map<String, Object> map2) {
         Map<String, Object> combinedMap = new TreeMap<>(map1);
@@ -33,6 +42,6 @@ public class Differ {
                 differs.add(new Differ(key, '+', 000, map2.get(key)));
             }
         }
-        return stylish.format(differs);
-        }
+        return Stylish.format(differs);
     }
+}
