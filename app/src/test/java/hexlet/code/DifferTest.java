@@ -4,7 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class DifferTest {
+final class DifferTest {
     private String json1;
     private String json2;
     private String yaml1;
