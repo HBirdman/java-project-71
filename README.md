@@ -14,6 +14,9 @@ https://asciinema.org/a/SA5gLrYC5nutrEuqif9gbhIms
 # asciinema link for nested structures:
 https://asciinema.org/a/NRMXboB1l8ESsxdph5atqDhPu
 
+# asciinema link for generate diff in plain format:
+https://asciinema.org/a/BB14R206L06XV2M4Rg6LpNk2X
+
 ## Start
 
 ```bash

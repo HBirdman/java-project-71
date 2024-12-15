@@ -35,11 +35,11 @@ public class App implements Callable<String> {
     public String call() throws Exception {
         String result = "";
         if (filepath1.endsWith("json")) {
-            result = Differ.generate(Parser.parseJson(filepath1), Parser.parseJson(filepath2));
+            result = Differ.generate(Parser.parseJson(filepath1), Parser.parseJson(filepath2), format);
             System.out.println(result);
             return result;
         } else if (filepath1.endsWith("yml")) {
-            result = Differ.generate(Parser.parseYaml(filepath1), Parser.parseYaml(filepath2));
+            result = Differ.generate(Parser.parseYaml(filepath1), Parser.parseYaml(filepath2), format);
             System.out.println(result);
             return result;
         }

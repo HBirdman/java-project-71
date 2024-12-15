@@ -1,4 +1,6 @@
-package hexlet.code;
+package hexlet.code.formatters;
+
+import hexlet.code.Differ;
 
 import java.util.List;
 import java.util.Objects;
@@ -8,22 +10,26 @@ public class Stylish {
     public static String format(List<Differ> differs) {
         StringBuilder result = new StringBuilder("{\n");
         for (var differ : differs) {
+            Object before = differ.getValueBefore();
+            Object after = differ.getValueAfter();
             if (Objects.equals(differ.getStatus(), ' ')) {
                 result.append("    ").append(differ.getKey())
-                        .append(": ").append(String.valueOf(differ.getValueBefore()))
+                        .append(": ").append(before)
                         .append("\n");
             } else if (Objects.equals(differ.getStatus(), '-')) {
                 result.append("  - ").append(differ.getKey())
-                        .append(": ").append(String.valueOf(differ.getValueBefore()))
+                        .append(": ").append(before)
                         .append("\n");
-                if (!Objects.equals(differ.getValueAfter(), 000)) {
-                    result.append("  + ").append(differ.getKey())
-                            .append(": ").append(String.valueOf(differ.getValueAfter()))
-                            .append("\n");
-                }
             } else if (Objects.equals(differ.getStatus(), '+')) {
                 result.append("  + ").append(differ.getKey())
-                        .append(": ").append(String.valueOf(differ.getValueAfter()))
+                        .append(": ").append(after)
+                        .append("\n");
+            } else if (Objects.equals(differ.getStatus(), '~')) {
+                result.append("  - ").append(differ.getKey())
+                        .append(": ").append(before)
+                        .append("\n");
+                result.append("  + ").append(differ.getKey())
+                        .append(": ").append(after)
                         .append("\n");
             }
         }
