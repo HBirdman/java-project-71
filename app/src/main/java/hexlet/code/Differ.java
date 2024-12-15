@@ -13,7 +13,6 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.Objects;
 
-
 @Getter
 @Setter
 @NoArgsConstructor
@@ -25,7 +24,18 @@ public class Differ {
     private Object valueBefore;
     private Object valueAfter;
 
-    public static String generate(Map<String, Object> map1, Map<String, Object> map2, String format) throws Exception {
+    public static String generate(String filePath1, String filePath2, String format) throws Exception {
+        Map<String, Object> map1;
+        Map<String, Object> map2;
+        if (filePath1.endsWith("json")) {
+            map1 = Parser.parseJson(filePath1);
+            map2 = Parser.parseJson(filePath2);
+        } else if (filePath1.endsWith("yml")) {
+            map1 = Parser.parseYaml(filePath1);
+            map2 = Parser.parseYaml(filePath2);
+        } else {
+            throw new Exception("Unknown format of files: " + filePath1 + " " + filePath2);
+        }
         Map<String, Object> combinedMap = new TreeMap<>(map1);
         combinedMap.putAll(map2);
         Set<Map.Entry<String, Object>> entries = combinedMap.entrySet();
@@ -44,5 +54,9 @@ public class Differ {
         }
 
         return Formatter.format(differs, format);
+    }
+
+    public static String generate(String filePath1, String filePath2) throws Exception {
+        return generate(filePath1, filePath2, "stylish");
     }
 }

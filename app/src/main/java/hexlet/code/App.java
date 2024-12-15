@@ -23,7 +23,7 @@ public class App implements Callable<String> {
 
     @Option(names = {"-f", "--format"}, paramLabel = "format",
             defaultValue = "stylish", description = "output format [default: ${DEFAULT-VALUE}]")
-    private String format;
+    static String format;
 
     @Parameters(paramLabel = "filepath1", description = "path to first file")
     static String filepath1;
@@ -33,16 +33,8 @@ public class App implements Callable<String> {
 
     @Override
     public String call() throws Exception {
-        String result = "";
-        if (filepath1.endsWith("json")) {
-            result = Differ.generate(Parser.parseJson(filepath1), Parser.parseJson(filepath2), format);
-            System.out.println(result);
-            return result;
-        } else if (filepath1.endsWith("yml")) {
-            result = Differ.generate(Parser.parseYaml(filepath1), Parser.parseYaml(filepath2), format);
-            System.out.println(result);
-            return result;
-        }
+        String result = Differ.generate(filepath1, filepath2, format);
+        System.out.println(result);
         return result;
     }
 

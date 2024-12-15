@@ -2,33 +2,24 @@ package hexlet.code;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import java.util.Map;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DifferTest {
-    private Map<String, Object> json1;
-    private Map<String, Object> json2;
-    private Map<String, Object> yaml1;
-    private Map<String, Object> yaml2;
+    private String json1;
+    private String json2;
+    private String yaml1;
+    private String yaml2;
     private String resultStylish;
     private String resultPlain;
     private String resultJson;
 
 
     @BeforeEach
-    public void beforeEach() throws Exception {
-        this.json1 = Parser.parseJson(
-                String.valueOf(Parser.getPath("src/test/resources/fixtures/file1.json"))
-        );
-        this.json2 = Parser.parseJson(
-                String.valueOf(Parser.getPath("src/test/resources/fixtures/file2.json"))
-        );
-        this.yaml1 = Parser.parseYaml(
-                String.valueOf(Parser.getPath("src/test/resources/fixtures/file1.yml"))
-        );
-        this.yaml2 = Parser.parseYaml(
-                String.valueOf(Parser.getPath("src/test/resources/fixtures/file2.yml"))
-        );
+    public void beforeEach() {
+        this.json1 = "src/test/resources/fixtures/file1.json";
+        this.json2 = "src/test/resources/fixtures/file2.json";
+        this.yaml1 = "src/test/resources/fixtures/file1.yml";
+        this.yaml2 = "src/test/resources/fixtures/file2.yml";
         this.resultStylish = """
                 {
                     chars1: [a, b, c]
@@ -91,12 +82,12 @@ public class DifferTest {
 
     @Test
     public void testGenerateJsonStylish() throws Exception {
-        assertEquals(resultStylish, Differ.generate(json1, json2, "stylish"));
+        assertEquals(resultStylish, Differ.generate(json1, json2));
     }
 
     @Test
     public void testGenerateYamlStylish() throws Exception {
-        assertEquals(resultStylish, Differ.generate(yaml1, yaml2, "stylish"));
+        assertEquals(resultStylish, Differ.generate(yaml1, yaml2));
     }
 
     @Test
