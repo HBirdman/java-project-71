@@ -17,6 +17,9 @@ https://asciinema.org/a/NRMXboB1l8ESsxdph5atqDhPu
 # asciinema link for generate diff in plain format:
 https://asciinema.org/a/BB14R206L06XV2M4Rg6LpNk2X
 
+# asciinema link for generate diff in json format:
+https://asciinema.org/a/kqpmytYBVd4gGbHyqSObgNMxf
+
 ## Start
 
 ```bash

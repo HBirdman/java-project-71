@@ -10,7 +10,7 @@ import java.util.Objects;
 public class Plain {
     public static String format(List<Differ> differs) {
         StringBuilder result = new StringBuilder();
-        for (var differ : differs) {
+        for (Differ differ : differs) {
             Object before = differ.getValueBefore();
             Object after = differ.getValueAfter();
             if (before instanceof ArrayList || before instanceof LinkedHashMap) {
@@ -23,15 +23,15 @@ public class Plain {
             } else if (after instanceof String) {
                 after = "'" + after + "'";
             }
-            if (Objects.equals(differ.getStatus(), '~')) {
+            if (Objects.equals(differ.getStatus(), "modified")) {
                 result.append("Property '").append(differ.getKey())
                         .append("' was updated. From ").append(before)
                         .append(" to ").append(after).append("\n");
-            } else if (Objects.equals(differ.getStatus(), '+')) {
+            } else if (Objects.equals(differ.getStatus(), "added")) {
                 result.append("Property '").append(differ.getKey())
                         .append("' was added with value: ")
                         .append(after).append("\n");
-            } else if (Objects.equals(differ.getStatus(), '-')) {
+            } else if (Objects.equals(differ.getStatus(), "deleted")) {
                 result.append("Property '").append(differ.getKey())
                         .append("' was removed")
                         .append("\n");

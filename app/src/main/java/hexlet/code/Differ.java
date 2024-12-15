@@ -21,7 +21,7 @@ import java.util.Objects;
 @ToString
 public class Differ {
     private String key;
-    private Character status;
+    private String status;
     private Object valueBefore;
     private Object valueAfter;
 
@@ -33,13 +33,13 @@ public class Differ {
         for (var entry : entries) {
             String key = entry.getKey();
             if (!map1.containsKey(key)) {
-                differs.add(new Differ(key, '+', 000, map2.get(key)));
+                differs.add(new Differ(key, "added", '-', map2.get(key)));
             } else if (!map2.containsKey(key)) {
-                differs.add(new Differ(key, '-', map1.get(key), 000));
+                differs.add(new Differ(key, "deleted", map1.get(key), '-'));
             } else if (Objects.equals(map2.get(key), map1.get(key))) {
-                differs.add(new Differ(key, ' ', map1.get(key), 000));
+                differs.add(new Differ(key, "unchanged", map1.get(key), '-'));
             } else if (!Objects.equals(map2.get(key), map1.get(key))) {
-                differs.add(new Differ(key, '~', map1.get(key), map2.get(key)));
+                differs.add(new Differ(key, "modified", map1.get(key), map2.get(key)));
             }
         }
 

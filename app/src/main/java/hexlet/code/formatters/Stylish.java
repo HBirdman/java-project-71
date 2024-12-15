@@ -9,22 +9,22 @@ import java.util.Objects;
 public class Stylish {
     public static String format(List<Differ> differs) {
         StringBuilder result = new StringBuilder("{\n");
-        for (var differ : differs) {
+        for (Differ differ : differs) {
             Object before = differ.getValueBefore();
             Object after = differ.getValueAfter();
-            if (Objects.equals(differ.getStatus(), ' ')) {
+            if (Objects.equals(differ.getStatus(), "unchanged")) {
                 result.append("    ").append(differ.getKey())
                         .append(": ").append(before)
                         .append("\n");
-            } else if (Objects.equals(differ.getStatus(), '-')) {
+            } else if (Objects.equals(differ.getStatus(), "deleted")) {
                 result.append("  - ").append(differ.getKey())
                         .append(": ").append(before)
                         .append("\n");
-            } else if (Objects.equals(differ.getStatus(), '+')) {
+            } else if (Objects.equals(differ.getStatus(), "added")) {
                 result.append("  + ").append(differ.getKey())
                         .append(": ").append(after)
                         .append("\n");
-            } else if (Objects.equals(differ.getStatus(), '~')) {
+            } else if (Objects.equals(differ.getStatus(), "modified")) {
                 result.append("  - ").append(differ.getKey())
                         .append(": ").append(before)
                         .append("\n");

@@ -12,6 +12,7 @@ public class DifferTest {
     private Map<String, Object> yaml2;
     private String resultStylish;
     private String resultPlain;
+    private String resultJson;
 
 
     @BeforeEach
@@ -69,6 +70,23 @@ public class DifferTest {
                 Property 'setting2' was updated. From 200 to 300
                 Property 'setting3' was updated. From true to 'none'
                 """;
+        this.resultJson = """
+                {"key":"chars1","status":"unchanged","valueBefore":["a","b","c"],"valueAfter":"-"}
+                {"key":"chars2","status":"modified","valueBefore":["d","e","f"],"valueAfter":false}
+                {"key":"checked","status":"modified","valueBefore":false,"valueAfter":true}
+                {"key":"default","status":"modified","valueBefore":null,"valueAfter":["value1","value2"]}
+                {"key":"id","status":"modified","valueBefore":45,"valueAfter":null}
+                {"key":"key1","status":"deleted","valueBefore":"value1","valueAfter":"-"}
+                {"key":"key2","status":"added","valueBefore":"-","valueAfter":"value2"}
+                {"key":"numbers1","status":"unchanged","valueBefore":[1,2,3,4],"valueAfter":"-"}
+                {"key":"numbers2","status":"modified","valueBefore":[2,3,4,5],"valueAfter":[22,33,44,55]}
+                {"key":"numbers3","status":"deleted","valueBefore":[3,4,5],"valueAfter":"-"}
+                {"key":"numbers4","status":"added","valueBefore":"-","valueAfter":[4,5,6]}
+                {"key":"obj1","status":"added","valueBefore":"-","valueAfter":{"nestedKey":"value","isNested":true}}
+                {"key":"setting1","status":"modified","valueBefore":"Some value","valueAfter":"Another value"}
+                {"key":"setting2","status":"modified","valueBefore":200,"valueAfter":300}
+                {"key":"setting3","status":"modified","valueBefore":true,"valueAfter":"none"}
+                """;
     }
 
     @Test
@@ -89,5 +107,15 @@ public class DifferTest {
     @Test
     public void testGenerateYamlPlain() throws Exception {
         assertEquals(resultPlain, Differ.generate(yaml1, yaml2, "plain"));
+    }
+
+    @Test
+    public void testGenerateJsonJson() throws Exception {
+        assertEquals(resultJson, Differ.generate(json1, json2, "json"));
+    }
+
+    @Test
+    public void testGenerateYamlJson() throws Exception {
+        assertEquals(resultJson, Differ.generate(yaml1, yaml2, "json"));
     }
 }
