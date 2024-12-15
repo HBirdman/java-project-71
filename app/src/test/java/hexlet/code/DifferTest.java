@@ -59,8 +59,7 @@ public class DifferTest {
                 Property 'obj1' was added with value: [complex value]
                 Property 'setting1' was updated. From 'Some value' to 'Another value'
                 Property 'setting2' was updated. From 200 to 300
-                Property 'setting3' was updated. From true to 'none'
-                """;
+                Property 'setting3' was updated. From true to 'none'""";
         this.resultJson = """
                 {"key":"chars1","status":"unchanged","valueBefore":["a","b","c"],"valueAfter":"-"}
                 {"key":"chars2","status":"modified","valueBefore":["d","e","f"],"valueAfter":false}
@@ -76,8 +75,7 @@ public class DifferTest {
                 {"key":"obj1","status":"added","valueBefore":"-","valueAfter":{"nestedKey":"value","isNested":true}}
                 {"key":"setting1","status":"modified","valueBefore":"Some value","valueAfter":"Another value"}
                 {"key":"setting2","status":"modified","valueBefore":200,"valueAfter":300}
-                {"key":"setting3","status":"modified","valueBefore":true,"valueAfter":"none"}
-                """;
+                {"key":"setting3","status":"modified","valueBefore":true,"valueAfter":"none"}""";
     }
 
     @Test

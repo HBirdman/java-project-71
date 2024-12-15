@@ -37,6 +37,6 @@ public class Plain {
                         .append("\n");
             }
         }
-        return result.toString();
+        return result.deleteCharAt(result.length() - 1).toString();
     }
 }

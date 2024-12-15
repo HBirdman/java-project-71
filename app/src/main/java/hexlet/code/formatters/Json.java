@@ -13,6 +13,6 @@ public class Json {
         for (Differ differ : differs) {
             result.append(objectMapper.writeValueAsString(differ)).append("\n");
         }
-        return result.toString();
+        return result.deleteCharAt(result.length() - 1).toString();
     }
 }
