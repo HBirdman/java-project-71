@@ -3,11 +3,16 @@ package hexlet.code;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import java.nio.file.Files;
-
-import static hexlet.code.Constant.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 final class DifferTest {
+    private final String jsonFile1 = "src/test/resources/fixtures/file1.json";
+    private final String jsonFile2 = "src/test/resources/fixtures/file2.json";
+    private final String yamlFile1 = "src/test/resources/fixtures/file1.yml";
+    private final String yamlFile2 = "src/test/resources/fixtures/file2.yml";
+    private final String stylishResult = "src/test/resources/fixtures/stylishResult.txt";
+    private final String plainResult = "src/test/resources/fixtures/plainResult.txt";
+    private final String jsonResult = "src/test/resources/fixtures/jsonResult.txt";
 
     @ParameterizedTest
     @CsvSource({
