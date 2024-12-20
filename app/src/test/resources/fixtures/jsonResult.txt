@@ -12,4 +12,4 @@
 {"key":"obj1","status":"added","valueBefore":"-","valueAfter":{"nestedKey":"value","isNested":true}}
 {"key":"setting1","status":"modified","valueBefore":"Some value","valueAfter":"Another value"}
 {"key":"setting2","status":"modified","valueBefore":200,"valueAfter":300}
-{"key":"setting3","status":"modified","valueBefore":true,"valueAfter":"none"};
+{"key":"setting3","status":"modified","valueBefore":true,"valueAfter":"none"}
